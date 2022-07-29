@@ -1,6 +1,7 @@
 # from the tkinter library
 from tkinter import *
 from tkinter import filedialog, messagebox
+from xml.etree.ElementTree import ParseError
 
 from numpy import insert
 
@@ -31,15 +32,17 @@ class Window():
         self.menu_archivo = Menu(self.menu, tearoff=False)
         self.menu_ayuda = Menu(self.menu, tearoff=False)
         # Agregarlo a la barra.
-        self.menu.add_cascade(menu=self.menu_archivo, label="Archivo")
+        self.menu.add_cascade(menu=self.menu_archivo, label="Archivo", underline=0)
         self.menu_archivo.add_command(
             label="Salir",
             accelerator="Ctrl+Q",
+            underline=0,
             command=exit
         )
-        self.menu.add_cascade(menu=self.menu_ayuda, label="Ayuda")
+        self.menu.add_cascade(menu=self.menu_ayuda, label="Ayuda", underline=1)
         self.menu_ayuda.add_command(
             label="Acerca de...",
+            underline=1,
             command=self.show_info
         )
         self.window.config(background = "white", menu=self.menu)
@@ -60,19 +63,26 @@ class Window():
         #No redimensionar ventana
         self.window.resizable(width=0, height=0)
         # Set window size
-        self.window.geometry("800x300")
+        self.window.geometry("800x500")
+        #Icono ventana
+        self.window.iconphoto(False, PhotoImage(file="images\\p48icon.png"))
     
     # file explorer window
     def select_file(self):
         self.filename = filedialog.askopenfilename(initialdir = "C:/ESIOS/p48cierre",title = "Seleccione un fichero",filetypes = (("XML files","*.xml*"),("all files","*.*")))
         # Change label contents
         self.label_file_explorer.configure(text="Fichero seleccionado: " + self.filename)
-        self.data = self.parser.parse(self.filename)
+        try:
+            self.data = self.parser.parse(self.filename)
+        except Exception as e:
+            messagebox.showerror("Procesamiento de fichero", e.__str__())
+        
+
 
 
     def insert_data(self):
-        res = self.repository.insert(self.data)
-        if "Error" in res:
-            messagebox.showerror("Operación inserción", res)
-        else:
-            messagebox.showinfo("Operación inserción", res)
+        try:
+            number = self.repository.insert(self.data)
+            messagebox.showinfo("Operación inserción", "Datos añadidos correctamente: " + str(number) + " filas añadidas")
+        except Exception as e:
+            messagebox.showerror("Operación de inserción", e.__str__())

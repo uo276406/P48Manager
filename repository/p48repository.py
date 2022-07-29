@@ -40,8 +40,8 @@ class p48repository():
 
         except sqlite3.Error:
             con.rollback()
-            return "Error de base de datos: probablemente datos ya añadidos"
+            raise Exception("Error de base de datos: probablemente datos ya añadidos")
         finally:
             cur.close()
             con.close()
-        return "Datos añadidos correctamente: " + str(rows) + " filas añadidas."
+        return rows
