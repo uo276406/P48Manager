@@ -21,7 +21,7 @@ class Window():
         self.window.mainloop()
 
     def create_buttons(self):
-        self.button_select_file = Button(self.window,text = "Seleccionar fichero...", font=("Arial", 12), command = self.select_file)
+        self.button_select_file = Button(self.window,text = "Seleccionar fichero...", font=("Arial", 12), command = self.parse_file)
         self.button_select_file.pack(side=TOP, fill=BOTH, padx=100, pady=10)
         self.button_add_to_bd = Button(self.window,text = "Añadir a base de datos", font=("Arial", 12), command = self.insert_data)
         self.button_add_to_bd.pack(side=TOP, fill=BOTH, padx=100, pady=10)
@@ -68,7 +68,7 @@ class Window():
         self.window.iconphoto(False, PhotoImage(file="images\\p48icon.png"))
     
     # file explorer window
-    def select_file(self):
+    def parse_file(self):
         self.filename = filedialog.askopenfilename(initialdir = "C:/ESIOS/p48cierre",title = "Seleccione un fichero",filetypes = (("XML files","*.xml*"),("all files","*.*")))
         # Change label contents
         self.label_file_explorer.configure(text="Fichero seleccionado: " + self.filename)
