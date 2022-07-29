@@ -50,8 +50,8 @@ class Window():
         self.label_file_explorer.pack(side=TOP, fill=BOTH, padx=20, pady=40)
 
 
-    def show_info():
-        messagebox.showinfo("Acerca de", "Aplicación que procesa ficheros xml de p48 de cierre de ESIOS y los almacena en una base de datos local\n\nAutor: Diego González Suárez - Universidad de Oviedo. \nContacto: uo276406@uniovi.es - diegogs1451@outlook.es")
+    def show_info(self):
+        messagebox.showinfo("Acerca de", "License: GNU General Public License v3.0\n\nAuthor: Diego González Suárez - Universidad de Oviedo.\n\nContact Me: uo276406@uniovi.es - diegogs1451@outlook.es\n\nSource Code: https://github.com/uo276406/P48Manager")
 
 
     def window_config(self):
