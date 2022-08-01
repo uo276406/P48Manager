@@ -1,16 +1,14 @@
 # from the tkinter library
 from tkinter import *
 from tkinter import filedialog, messagebox
-from xml.etree.ElementTree import ParseError
-
-from numpy import insert
 
 
 class Window():
 
-    def __init__(self, parser, repository):
+    def __init__(self, parser, repository, graphic):
         self.parser = parser
         self.repository = repository
+        self.graphic = graphic
         self.data = {}
         self.window = Tk()
         self.window_config()
@@ -20,11 +18,15 @@ class Window():
         # Let the window wait for any events
         self.window.mainloop()
 
+
     def create_buttons(self):
         self.button_select_file = Button(self.window,text = "Seleccionar fichero...", font=("Arial", 12), command = self.parse_file)
         self.button_select_file.pack(side=TOP, fill=BOTH, padx=100, pady=10)
         self.button_add_to_bd = Button(self.window,text = "Añadir a base de datos", font=("Arial", 12), command = self.insert_data)
         self.button_add_to_bd.pack(side=TOP, fill=BOTH, padx=100, pady=10)
+        self.button_show_data = Button(self.window,text = "Mostrar gráfica", font=("Arial", 12), command = self.show_data)
+        self.button_show_data.pack(side=TOP, fill=BOTH, padx=100, pady=10)
+
 
     def create_menus(self):
         self.menu = Menu()
@@ -46,6 +48,7 @@ class Window():
             command=self.show_info
         )
         self.window.config(background = "white", menu=self.menu)
+
     
     def create_labels(self):
         # Create a File Explorer label
@@ -78,11 +81,13 @@ class Window():
             messagebox.showerror("Procesamiento de fichero", e.__str__())
         
 
-
-
     def insert_data(self):
         try:
             number = self.repository.insert(self.data)
             messagebox.showinfo("Operación inserción", "Datos añadidos correctamente: " + str(number) + " filas añadidas")
         except Exception as e:
             messagebox.showerror("Operación de inserción", e.__str__())
+    
+
+    def show_data(self):
+        self.graphic.draw(self.data)

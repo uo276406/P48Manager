@@ -1,7 +1,9 @@
 from gui.window import Window
-from parser.p48parser import p48parser
-from repository.p48repository import p48repository
+from parser.p48parser import P48parser
+from repository.p48repository import P48repository
+from graphic.p48grahic import P48grapic
 
-parser = p48parser()
-repository = p48repository()
-Window(parser, repository)
+parser = P48parser()
+repository = P48repository()
+graphic = P48grapic()
+Window(parser, repository, graphic)

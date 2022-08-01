@@ -1,9 +1,9 @@
 import xml.etree.ElementTree as ET
 import os
 
-from cicles.p48cicles import p48cicles
+from cicles.p48cicles import P48cicles
 
-class p48parser():
+class P48parser():
 
     def parse(self, filename):
         try:
@@ -13,7 +13,7 @@ class p48parser():
             for serie in root:
                 for cicle in serie:
                     if cicle.tag == '{urn:sios.ree.es:p48cierre:1:0}UPEntrada':
-                        if cicle.attrib['v'] in p48cicles().list:
+                        if cicle.attrib['v'] in P48cicles().list:
                             name_cicle = cicle.attrib['v']
                             for cicle in serie:
                                 if cicle.tag == '{urn:sios.ree.es:p48cierre:1:0}Periodo':

@@ -1,9 +1,9 @@
 import sqlite3
 import os
 
-from cicles.p48cicles import p48cicles
+from cicles.p48cicles import P48cicles
 
-class p48repository():
+class P48repository():
     def __init__(self):
         self.pathdb = "C:/ESIOS/p48cierre/p48cierre.db"
     
@@ -28,7 +28,7 @@ class p48repository():
         cur = con.cursor()
         try:
             rows = 0
-            for cicle in p48cicles().list:
+            for cicle in P48cicles().list:
                 try:	
                     for i in range(len(data[cicle])):
                         # Hacemos los inserts a la base de datos
