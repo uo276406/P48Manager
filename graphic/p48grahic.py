@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from cicles.p48cicles import P48cicles
 
 class P48grapic():
+    
     def draw(self, data):
         hours = np.arange(1,25,1)
         plt.figure()

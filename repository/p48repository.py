@@ -12,7 +12,7 @@ class P48repository():
         f.close()
         con = sqlite3.connect(self.pathdb)
         cur = con.cursor()
-        cur.execute('CREATE TABLE P48Cierre (Ciclo TEXT, Fecha TEXT, Hora INTEGER CHECK(Hora <= 24 AND Hora >= 1), Produccion REAL,PRIMARY KEY(Ciclo,Fecha,Produccion,Hora))')
+        cur.execute('CREATE TABLE P48Cierre (Ciclo TEXT, Fecha TEXT, Hora INTEGER CHECK(Hora <= 24 AND Hora >= 1), Produccion TEXT,PRIMARY KEY(Ciclo,Fecha,Produccion,Hora))')
         con.commit()
         cur.close()
         con.close()
@@ -32,6 +32,7 @@ class P48repository():
                 try:	
                     for i in range(len(data[cicle])):
                         # Hacemos los inserts a la base de datos
+                        print((cicle, data["date"], i+1, data[cicle][i+1]))
                         cur.execute("INSERT INTO P48Cierre values (?,?,?,?)", (cicle, data["date"], i+1, data[cicle][i+1]))
                         rows+=1	
                 except KeyError:
