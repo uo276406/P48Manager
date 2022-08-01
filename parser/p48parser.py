@@ -51,7 +51,6 @@ class P48parser():
             raise Exception("Error: Fichero no encontrado")
         except ET.ParseError:
             raise Exception("Error: Fallo al procesar el fichero. Asegurese que sea el tipo correcto.")
-        print(res)
         return res
 
     def get_file_date(self, filename):
