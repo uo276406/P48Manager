@@ -1,9 +1,9 @@
 import sqlite3
 import os
 
-from cicles.p48cicles import P48cicles
+from cicles.P48CierreCicles import P48CierreCicles
 
-class P48repository():
+class P48CierreRepository():
     def __init__(self):
         self.pathdb = "C:/ESIOS/p48cierre/p48cierre.db"
     
@@ -24,15 +24,14 @@ class P48repository():
         if not os.path.exists(self.pathdb):
             self.create_db_file_and_table()
         
-        con = sqlite3.connect(self.pathdb)
-        cur = con.cursor()
         try:
+            con = sqlite3.connect(self.pathdb)
+            cur = con.cursor()
             rows = 0
-            for cicle in P48cicles().list:
+            for cicle in P48CierreCicles().list:
                 try:	
                     for i in range(len(data[cicle])):
                         # Hacemos los inserts a la base de datos
-                        print((cicle, data["date"], i+1, data[cicle][i+1]))
                         cur.execute("INSERT INTO P48Cierre values (?,?,?,?)", (cicle, data["date"], i+1, data[cicle][i+1]))
                         rows+=1	
                 except KeyError:
@@ -46,3 +45,24 @@ class P48repository():
             cur.close()
             con.close()
         return rows
+
+
+    def find(self, date, cicles):
+        data = {'date': date}
+        try:
+            con = sqlite3.connect(self.pathdb)
+            cur = con.cursor()
+            for cicle in cicles:
+                # Hacemos los inserts a la base de datos
+                cur.execute("SELECT Hora, Produccion FROM P48Cierre WHERE Ciclo=? AND Fecha=? ORDER BY Hora", (cicle, date))
+                rows = cur.fetchall()
+                data[cicle] = {}
+                for row in rows:
+                    data[cicle][row[0]] = row[1]
+        except sqlite3.Error:
+            raise Exception("Error de base de datos: problema al consultar los datos")
+        finally:
+            cur.close()
+            con.close()
+
+        return data

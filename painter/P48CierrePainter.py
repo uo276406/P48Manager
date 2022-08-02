@@ -1,18 +1,18 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from cicles.p48cicles import P48cicles
+from cicles.P48CierreCicles import P48CierreCicles
 
-class P48grapic():
+class P48CierrePainter():
     
     def draw(self, data):
         hours = np.arange(1,25,1)
         plt.figure()
-        for cicle in P48cicles().list:
+        for cicle in P48CierreCicles().list:
             values = []
             try:
                 for hour in hours:
-                    values.append(data[cicle][hour])
+                    values.append(float(data[cicle][hour].replace(',', '.')))
                 plt.plot(hours, values, label=cicle, marker='o')
             except KeyError:
                 continue

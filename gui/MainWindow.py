@@ -1,14 +1,16 @@
 # from the tkinter library
 from tkinter import *
 from tkinter import filedialog, messagebox
+from gui.GraphicDialog import GraphicDialog
 
 
 class Window():
 
-    def __init__(self, parser, repository, graphic):
+    def __init__(self, parser, repository, painter, cicles):
         self.parser = parser
         self.repository = repository
-        self.graphic = graphic
+        self.painter = painter
+        self.cicles = cicles
         self.data = {}
         self.window = Tk()
         self.window_config()
@@ -24,8 +26,8 @@ class Window():
         self.button_select_file.pack(side=TOP, fill=BOTH, padx=100, pady=10)
         self.button_add_to_bd = Button(self.window,text = "Añadir a base de datos", font=("Arial", 12), command = self.insert_data)
         self.button_add_to_bd.pack(side=TOP, fill=BOTH, padx=100, pady=10)
-        self.button_show_data = Button(self.window,text = "Mostrar gráfica", font=("Arial", 12), command = self.show_data)
-        self.button_show_data.pack(side=TOP, fill=BOTH, padx=100, pady=10)
+        self.button_show_data = Button(self.window,text = "Mostrar gráficos...", font=("Arial", 12), command = self.open_graphic_dialog)
+        self.button_show_data.pack(side=BOTTOM, fill=BOTH, padx=100, pady=75)
 
 
     def create_menus(self):
@@ -53,7 +55,7 @@ class Window():
     def create_labels(self):
         # Create a File Explorer label
         self.label_file_explorer = Label(self.window,text = "Ningún fichero seleccionado.", font=("Arial", 12))
-        self.label_file_explorer.pack(side=TOP, fill=BOTH, padx=20, pady=40)
+        self.label_file_explorer.pack(side=TOP, fill=BOTH, padx=20, pady=20)
 
 
     def show_info(self):
@@ -66,7 +68,7 @@ class Window():
         #No redimensionar ventana
         self.window.resizable(width=0, height=0)
         # Set window size
-        self.window.geometry("800x500")
+        self.window.geometry("800x400")
         #Icono ventana
         self.window.iconphoto(False, PhotoImage(file="images\\p48icon.png"))
     
@@ -89,5 +91,5 @@ class Window():
             messagebox.showerror("Operación de inserción", e.__str__())
     
 
-    def show_data(self):
-        self.graphic.draw(self.data)
+    def open_graphic_dialog(self):
+        GraphicDialog(self.window, self.painter, self.cicles, self.repository)

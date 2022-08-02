@@ -1,9 +1,9 @@
 import xml.etree.ElementTree as ET
 import os
 
-from cicles.p48cicles import P48cicles
+from cicles.P48CierreCicles import P48CierreCicles
 
-class P48parser():
+class P48CierreParser():
 
     def parse(self, filename):
         try:
@@ -13,7 +13,7 @@ class P48parser():
             for serie in root:
                 for cicle in serie:
                     if cicle.tag == '{urn:sios.ree.es:p48cierre:1:0}UPEntrada':
-                        if cicle.attrib['v'] in P48cicles().list:
+                        if cicle.attrib['v'] in P48CierreCicles().list:
                             name_cicle = cicle.attrib['v']
                             for cicle in serie:
                                 if cicle.tag == '{urn:sios.ree.es:p48cierre:1:0}Periodo':
@@ -33,7 +33,7 @@ class P48parser():
                                             sum_cuarter = 0
                             res[name_cicle] = data
                     elif cicle.tag == '{http://sujetos.esios.ree.es/schemas/2007/03/07/P48Cierre-esios-MP/}UPEntrada':
-                        if cicle.attrib['v'] in P48cicles().list:
+                        if cicle.attrib['v'] in P48CierreCicles().list:
                             name_cicle = cicle.attrib['v']
                             for cicle in serie:
                                 if cicle.tag == '{http://sujetos.esios.ree.es/schemas/2007/03/07/P48Cierre-esios-MP/}Periodo':

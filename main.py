@@ -1,9 +1,12 @@
-from gui.window import Window
-from parser.p48parser import P48parser
-from repository.p48repository import P48repository
-from graphic.p48grahic import P48grapic
 
-parser = P48parser()
-repository = P48repository()
-graphic = P48grapic()
-Window(parser, repository, graphic)
+from gui.MainWindow import Window
+from cicles.P48CierreCicles import P48CierreCicles
+from painter.P48CierrePainter import P48CierrePainter
+from parser.P48CierreParser import P48CierreParser
+from repository.P48CierreRepository import P48CierreRepository
+
+parser = P48CierreParser()
+repository = P48CierreRepository()
+painter = P48CierrePainter()
+cicles = P48CierreCicles().list
+Window(parser, repository, painter, cicles)

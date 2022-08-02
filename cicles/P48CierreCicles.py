@@ -1,4 +1,4 @@
-class P48cicles():
+class P48CierreCicles():
     def __init__(self):
         self.list = ['CTJON1','CTJON3','ACE3','ACE4','ALG3','AMBIETA','ARCOS1','ARCOS2','ARCOS3'
         ,'ARRU1','ARRU2','BAHIAB','BES3','BES4','BES5','CAMGI10','CAMGI20','COL4','CTGN1','CTGN2',
