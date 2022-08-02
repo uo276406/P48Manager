@@ -1,5 +1,6 @@
 
 from tkinter import *
+from tkinter import messagebox
 import tkcalendar
 import datetime
 
@@ -65,7 +66,14 @@ class GraphicDialog():
                 cicles_to_look_for.append(self.cicles[i])
         
         data = self.repository.find(datetime_str, cicles_to_look_for)
-        self.painter.draw(data)
+        show = False
+        for cicle in cicles_to_look_for:
+            if len(data[cicle]) > 0:
+                show = True
+        if show:
+            self.painter.draw(data)
+        else:
+            messagebox.showinfo('Ver Datos', 'No se han encontrado datos para el día y los ciclos seleccionados.')
 
     def clear_checkboxes(self):
         for i in range(len(self.cicles)):
