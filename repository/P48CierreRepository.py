@@ -1,8 +1,6 @@
 import sqlite3
 import os
 
-from cicles.P48CierreCicles import P48CierreCicles
-
 class P48CierreRepository():
     
     def __init__(self, cicles):

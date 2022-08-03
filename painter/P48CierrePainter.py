@@ -1,8 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from cicles.P48CierreCicles import P48CierreCicles
-
 class P48CierrePainter():
     def __init__(self, cicles):
         self.cicles = cicles
