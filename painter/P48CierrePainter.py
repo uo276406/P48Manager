@@ -4,11 +4,14 @@ import matplotlib.pyplot as plt
 from cicles.P48CierreCicles import P48CierreCicles
 
 class P48CierrePainter():
-    
+    def __init__(self, cicles):
+        self.cicles = cicles
+
+
     def draw(self, data):
         hours = np.arange(1,25,1)
         plt.figure()
-        for cicle in P48CierreCicles().list:
+        for cicle in self.cicles:
             values = []
             try:
                 for hour in hours:

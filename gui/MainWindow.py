@@ -4,7 +4,7 @@ from tkinter import filedialog, messagebox
 from gui.GraphicDialog import GraphicDialog
 
 
-class Window():
+class MainWindow():
 
     def __init__(self, parser, repository, painter, cicles):
         self.parser = parser
@@ -69,9 +69,7 @@ class Window():
         self.window.resizable(width=0, height=0)
         # Set window size
         self.window.geometry("800x400")
-        #Icono ventana
-        self.window.iconphoto(False, PhotoImage(file="images\\p48icon.png"))
-    
+        
     # file explorer window
     def parse_file(self):
         self.filename = filedialog.askopenfilename(initialdir = "C:/ESIOS/p48cierre",title = "Seleccione un fichero",filetypes = (("XML files","*.xml*"),("all files","*.*")))

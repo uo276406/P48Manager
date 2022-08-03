@@ -1,19 +1,20 @@
 import xml.etree.ElementTree as ET
 import os
 
-from cicles.P48CierreCicles import P48CierreCicles
-
 class P48CierreParser():
 
-    def parse(self, filename):
+    def __init__(self, cicles):
+        self.cicles = cicles
+
+    def parse(self, filepath):
         try:
-            root = ET.parse(filename).getroot()
+            root = ET.parse(filepath).getroot()
             res = {}
-            res["date"] = self.get_file_date(filename)
+            res["date"] = self.get_file_date(filepath)
             for serie in root:
                 for cicle in serie:
                     if cicle.tag == '{urn:sios.ree.es:p48cierre:1:0}UPEntrada':
-                        if cicle.attrib['v'] in P48CierreCicles().list:
+                        if cicle.attrib['v'] in self.cicles:
                             name_cicle = cicle.attrib['v']
                             for cicle in serie:
                                 if cicle.tag == '{urn:sios.ree.es:p48cierre:1:0}Periodo':
@@ -33,7 +34,7 @@ class P48CierreParser():
                                             sum_cuarter = 0
                             res[name_cicle] = data
                     elif cicle.tag == '{http://sujetos.esios.ree.es/schemas/2007/03/07/P48Cierre-esios-MP/}UPEntrada':
-                        if cicle.attrib['v'] in P48CierreCicles().list:
+                        if cicle.attrib['v'] in self.cicles:
                             name_cicle = cicle.attrib['v']
                             for cicle in serie:
                                 if cicle.tag == '{http://sujetos.esios.ree.es/schemas/2007/03/07/P48Cierre-esios-MP/}Periodo':
@@ -53,8 +54,8 @@ class P48CierreParser():
             raise Exception("Error: Fallo al procesar el fichero. Asegurese que sea el tipo correcto.")
         return res
 
-    def get_file_date(self, filename):
-        date = os.path.basename(filename)
+    def get_file_date(self, filepath):
+        date = os.path.basename(filepath)
         date_list = date.split('_')
         date = date_list[1].split('.')[0]
         date = date[:4] + '-' + date[4:6] + '-' + date[6:]

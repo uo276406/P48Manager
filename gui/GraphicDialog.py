@@ -21,7 +21,6 @@ class GraphicDialog():
         self.top.focus_set()
         self.top.title("P48Manager: Mostrar Gráfico")
         self.top.geometry("1000x650")
-        self.top.iconphoto(False, PhotoImage(file="images\\p48icon.png"))
         self.top.resizable(width=0, height=0)
         self.cal = self.create_date_picker()
         self.create_checkboxes()
@@ -65,7 +64,8 @@ class GraphicDialog():
             if self.checkboxes_values[i].get():
                 cicles_to_look_for.append(self.cicles[i])
         
-        data = self.repository.find(datetime_str, cicles_to_look_for)
+        data = {'date': datetime_str, 'cicles': cicles_to_look_for}
+        data = self.repository.find(data)
         show = False
         for cicle in cicles_to_look_for:
             if len(data[cicle]) > 0:

@@ -4,8 +4,10 @@ import os
 from cicles.P48CierreCicles import P48CierreCicles
 
 class P48CierreRepository():
-    def __init__(self):
+    
+    def __init__(self, cicles):
         self.pathdb = "C:/ESIOS/p48cierre/p48cierre.db"
+        self.cicles = cicles
     
     def create_db_file_and_table(self):
         f = open(self.pathdb, 'w')
@@ -28,7 +30,7 @@ class P48CierreRepository():
             con = sqlite3.connect(self.pathdb)
             cur = con.cursor()
             rows = 0
-            for cicle in P48CierreCicles().list:
+            for cicle in self.cicles:
                 try:	
                     for i in range(len(data[cicle])):
                         # Hacemos los inserts a la base de datos
@@ -47,14 +49,13 @@ class P48CierreRepository():
         return rows
 
 
-    def find(self, date, cicles):
-        data = {'date': date}
+    def find(self, data):
         try:
             con = sqlite3.connect(self.pathdb)
             cur = con.cursor()
-            for cicle in cicles:
+            for cicle in data['cicles']:
                 # Hacemos los inserts a la base de datos
-                cur.execute("SELECT Hora, Produccion FROM P48Cierre WHERE Ciclo=? AND Fecha=? ORDER BY Hora", (cicle, date))
+                cur.execute("SELECT Hora, Produccion FROM P48Cierre WHERE Ciclo=? AND Fecha=? ORDER BY Hora", (cicle, data['date']))
                 rows = cur.fetchall()
                 data[cicle] = {}
                 for row in rows:
