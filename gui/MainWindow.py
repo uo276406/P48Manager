@@ -74,11 +74,12 @@ class MainWindow():
     def parse_file(self):
         self.filename = filedialog.askopenfilename(initialdir = "C:/ESIOS/p48cierre",title = "Seleccione un fichero",filetypes = (("XML files","*.xml*"),("all files","*.*")))
         # Change label contents
-        self.label_file_explorer.configure(text="Fichero seleccionado: " + self.filename)
-        try:
-            self.data = self.parser.parse(self.filename)
-        except Exception as e:
-            messagebox.showerror("Procesamiento de fichero", e.__str__())
+        if(self.filename != ''):
+            self.label_file_explorer.configure(text="Fichero seleccionado: " + self.filename)
+            try:
+                self.data = self.parser.parse(self.filename)
+            except Exception as e:
+                messagebox.showerror("Procesamiento de fichero", e.__str__())
         
 
     def insert_data(self):

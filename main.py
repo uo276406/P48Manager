@@ -6,10 +6,7 @@ from parser.P48CierreParser import P48CierreParser
 from repository.P48CierreRepository import P48CierreRepository
 
 # Lista de cicles
-cicles = P48CierreCicles().get_instance()
-cicles1 = P48CierreCicles()
-print(id(cicles))
-print(id(cicles1))
+cicles = P48CierreCicles()
 
 # Tools
 parser = P48CierreParser(cicles)
