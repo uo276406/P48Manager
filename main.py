@@ -1,20 +1,19 @@
-
+from cycles.P48CierreCicles import P48CierreCycles
 from gui.MainWindow import MainWindow
-from cicles.P48CierreCicles import P48CierreCicles
 from painter.P48CierrePainter import P48CierrePainter
 from parser.P48CierreParser import P48CierreParser
 from repository.P48CierreRepository import P48CierreRepository
 
-# Lista de cicles
-cicles = P48CierreCicles().list
+# Lista de ciclos
+cycles = P48CierreCycles().list
 
 # Tools
-parser = P48CierreParser(cicles)
-repository = P48CierreRepository(cicles)
-painter = P48CierrePainter(cicles)
+parser = P48CierreParser(cycles)
+repository = P48CierreRepository(cycles)
+painter = P48CierrePainter(cycles)
 
 try:
-    MainWindow(parser, repository, painter, cicles)
+    MainWindow(parser, repository, painter, cycles)
 except Exception as e:
     print('Ha ocurrido una excepción: ' + e)
     print('Contacte conmigo: diegogs1451@outlook.es')

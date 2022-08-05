@@ -1,53 +1,53 @@
-import xml.etree.ElementTree as ET
 import os
+import xml.etree.ElementTree as ET
 
-class P48CierreParser():
 
-    def __init__(self, cicles):
-        self.cicles = cicles
+class P48CierreParser:
+
+    def __init__(self, cycles):
+        self.cycles = cycles
 
     def parse(self, filepath):
         try:
             root = ET.parse(filepath).getroot()
-            res = {}
-            res["date"] = self.get_file_date(filepath)
+            res = {"date": self.get_file_date(filepath)}
             for serie in root:
-                for cicle in serie:
-                    if cicle.tag == '{urn:sios.ree.es:p48cierre:1:0}UPEntrada':
-                        if cicle.attrib['v'] in self.cicles:
-                            name_cicle = cicle.attrib['v']
-                            for cicle in serie:
-                                if cicle.tag == '{urn:sios.ree.es:p48cierre:1:0}Periodo':
-                                    sum_cuarter = 0.
-                                    is_cuarter = 0
+                for cycle in serie:
+                    if cycle.tag == '{urn:sios.ree.es:p48cierre:1:0}UPEntrada':
+                        if cycle.attrib['v'] in self.cycles:
+                            name_cycle = cycle.attrib['v']
+                            data = {}
+                            for cycle in serie:
+                                if cycle.tag == '{urn:sios.ree.es:p48cierre:1:0}Periodo':
+                                    sum_quarter = 0.
+                                    is_quarter = 0
                                     hour = 0
-                                    data = {}
-                                    for intervalo in cicle:
-                                        for value in intervalo:
-                                            if value.tag =='{urn:sios.ree.es:p48cierre:1:0}Ctd':
-                                                sum_cuarter += float(value.attrib['v'])
-                                                is_cuarter += 1
-                                        if is_cuarter % 4 == 0 and is_cuarter != 0:
+                                    for interval in cycle:
+                                        for value in interval:
+                                            if value.tag == '{urn:sios.ree.es:p48cierre:1:0}Ctd':
+                                                sum_quarter += float(value.attrib['v'])
+                                                is_quarter += 1
+                                        if is_quarter % 4 == 0 and is_quarter != 0:
                                             hour += 1
-                                            sum_cuarter = str(sum_cuarter).replace('.', ',')
-                                            data[hour] = sum_cuarter
-                                            sum_cuarter = 0
-                            res[name_cicle] = data
-                    elif cicle.tag == '{http://sujetos.esios.ree.es/schemas/2007/03/07/P48Cierre-esios-MP/}UPEntrada':
-                        if cicle.attrib['v'] in self.cicles:
-                            name_cicle = cicle.attrib['v']
-                            for cicle in serie:
-                                if cicle.tag == '{http://sujetos.esios.ree.es/schemas/2007/03/07/P48Cierre-esios-MP/}Periodo':
-                                    data = {}
+                                            sum_quarter = str(sum_quarter).replace('.', ',')
+                                            data[hour] = sum_quarter
+                                            sum_quarter = 0
+                            res[name_cycle] = data
+                    elif cycle.tag == '{http://sujetos.esios.ree.es/schemas/2007/03/07/P48Cierre-esios-MP/}UPEntrada':
+                        if cycle.attrib['v'] in self.cycles:
+                            name_cycle = cycle.attrib['v']
+                            data = {}
+                            for cycle in serie:
+                                if cycle.tag == '{http://sujetos.esios.ree.es/schemas/2007/03/07/P48Cierre-esios-MP/}Periodo':
                                     hour = 0
-                                    for intervalo in cicle:
+                                    for interval in cycle:
                                         production = ''
-                                        for value in intervalo:
-                                            if value.tag =='{http://sujetos.esios.ree.es/schemas/2007/03/07/P48Cierre-esios-MP/}Ctd':
+                                        for value in interval:
+                                            if value.tag == '{http://sujetos.esios.ree.es/schemas/2007/03/07/P48Cierre-esios-MP/}Ctd':
                                                 production = value.attrib['v'].replace('.', ',')
                                                 hour += 1
                                                 data[hour] = production
-                            res[name_cicle] = data
+                            res[name_cycle] = data
         except FileNotFoundError:
             raise Exception("Error: Fichero no encontrado")
         except ET.ParseError:

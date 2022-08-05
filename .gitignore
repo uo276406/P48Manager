@@ -11,3 +11,4 @@ gui/__pycache__/window.cpython-310.pyc
 parser/__pycache__/p48parser.cpython-310.pyc
 repository/__pycache__/p48repository.cpython-310.pyc
 cicles/__pycache__/p48cicles.cpython-310.pyc
+.idea/*
