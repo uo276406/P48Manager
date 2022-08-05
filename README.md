@@ -19,8 +19,6 @@ de interpretar.
 
 ``` pip install tkcalendar ```
 
-``` pip install tkinter ```
-
 - Utilidades numéricas y de gráficas
 
 ``` pip install numpy ```

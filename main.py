@@ -15,5 +15,5 @@ painter = P48CierrePainter(cycles)
 try:
     MainWindow(parser, repository, painter, cycles)
 except Exception as e:
-    print('Ha ocurrido una excepción: ' + e)
+    print('Ha ocurrido una excepción: ' + e.__str__())
     print('Contacte conmigo: diegogs1451@outlook.es')
