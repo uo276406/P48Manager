@@ -22,5 +22,5 @@ class P48CierrePainter():
         plt.grid()
         plt.title('Valores P48Cierre para el día: ' + data['date'])
         plt.xlabel('Horas del día')
-        plt.ylabel('MWH')       
+        plt.ylabel('Producción (MWH)')       
         plt.show()
