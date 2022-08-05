@@ -1,3 +1,8 @@
+"""
+    Project available: https://github.com/uo276406/P48Manager
+    @author: Diego González Suárez - diegogs1451@outloo.es
+"""
+
 from cycles.P48CierreCicles import P48CierreCycles
 from gui.MainWindow import MainWindow
 from painter.P48CierrePainter import P48CierrePainter
