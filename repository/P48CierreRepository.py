@@ -4,9 +4,9 @@ import sqlite3
 
 class P48CierreRepository:
 
-    def __init__(self, cicles):
+    def __init__(self, cycles):
         self.path_db = "C:/ESIOS/p48cierre/p48cierre.db"
-        self.cycles = cicles
+        self.cycles = cycles
 
     def create_db_file_and_table(self):
         f = open(self.path_db, 'w')
