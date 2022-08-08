@@ -1,6 +1,6 @@
 """
     Project available: https://github.com/uo276406/P48Manager
-    @author: Diego González Suárez - diegogs1451@outloo.es
+    @author: Diego González Suárez - diegogs1451@outlook.es
 """
 
 from cycles.P48CierreCicles import P48CierreCycles
