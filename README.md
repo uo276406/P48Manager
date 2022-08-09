@@ -11,10 +11,6 @@ de interpretar.
 
 ### 2. Instalar paquetes que pudiese ser que no estén instalados, desde la interfaz de comandos (cmd, símbolo del sistema en el buscador de windows) copiaremos y ejecutaremos lo siguiente.
 
-- Manejo de BBDD
-
-``` pip install sqlite3 ```
-
 - Componentes interfaz gráfica
 
 ``` pip install tkcalendar ```
