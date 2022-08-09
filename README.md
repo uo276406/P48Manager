@@ -27,3 +27,9 @@ de interpretar.
 
 Para ver la documentación se puede acudir a la sección de
 la [wiki](https://github.com/uo276406/P48Manager/wiki/Documentation-%F0%9F%93%84) donde hay información detallada.
+
+# Contacto
+
+Para cualquier duda relativa a la aplicación o cualquier cosa rlacionada con algún problema o lo que sea, contactar conmigo vía correo electrónico.
+- <a href="mailto:diegogs1451@outlook.es">diegogs1451@outlook.es</a>
+- <a href="mailto:uo276406@uniovi.es">uo276406@uniovi.es</a>
